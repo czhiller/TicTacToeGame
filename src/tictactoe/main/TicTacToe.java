@@ -37,39 +37,56 @@ public class TicTacToe {
 
         /**
          *
-         * Getting all the input provided in the properties file.
-         *
-         */
-        int size = Integer.parseInt(prop.getProperty("boardSize"));
-
-        Player firstPlayer = new Player(prop.getProperty("playerOneName"), prop.getProperty("playerOneId").charAt(0), 0);
-        char player1 = firstPlayer.getIdentifier();
-
-        Player secondPlayer = new Player(prop.getProperty("playerTwoName"), prop.getProperty("playerTwoId").charAt(0), 1);
-        char player2 = firstPlayer.getIdentifier();
-
-        Player computer = new Player(prop.getProperty("computerPlayerName"), prop.getProperty("computerPlayerId").charAt(0), 2);
-        char computerPlayer = firstPlayer.getIdentifier();
-
-        /**
-         *
-         * Creating a list of players in order to be able to switch players
-         * during turns.
+         * Getting all the input provided in the properties file and Creating a
+         * list of players in order to be able to switch players during turns.
          *
          */
         List<Player> players = new ArrayList<Player>();
 
-        players.add(firstPlayer);
-        players.add(secondPlayer);
-        players.add(computer);
+        int size = 0;
+        try {
+            size = Integer.parseInt(prop.getProperty("boardSize"));
+        } catch (Exception e) {
+            size = 2;
+        }
+
+        char player1 = ' ';
+        Player firstPlayer = new Player(0);
+        try {
+            player1 = prop.getProperty("playerOneId").charAt(0);
+            firstPlayer.setIdentifier(player1);
+            firstPlayer.setName(prop.getProperty("playerOneName"));
+        } catch (Exception e) {
+            player1 = ' ';
+        }
+
+        char player2 = ' ';
+        Player secondPlayer = new Player(1);
+        try {
+            player2 = prop.getProperty("playerTwoId").charAt(0);
+            secondPlayer.setIdentifier(player2);
+            secondPlayer.setName(prop.getProperty("playerTwoName"));
+        } catch (Exception e) {
+            player2 = ' ';
+        }
+
+        char computerPlayer = ' ';
+        Player computer = new Player(2);
+        try {
+            computerPlayer = prop.getProperty("computerPlayerId").charAt(0);
+            computer.setIdentifier(computerPlayer);
+            computer.setName(prop.getProperty("computerPlayerName"));
+        } catch (Exception e) {
+            computerPlayer = ' ';
+        }
 
         /**
          *
          * Defining msgs like initial input ask and error msgs, These could be
-         * extracted to final constants, above the main mehod.
+         * extracted to final constants, above the main method.
          *
          */
-        String msgToAsk = "Enter first player character (only the first char you enter will be used): ";
+        String msgToAsk = "Enter player %s character (only the first char you enter will be used): ";
         String invalidInputErrorMsg = "Invalid input, please read the instructions in the parenthesis. Try again.";
         String alreadyTakenErrorMsg = "That position is already taken! Try again.";
 
@@ -88,6 +105,7 @@ public class TicTacToe {
                     if (player1 == ' ') {
                         throw new Exception("Invalid input");
                     } else {
+                        firstPlayer.setIdentifier(player1);
                         break;
                     }
                 } catch (Exception e) {
@@ -111,6 +129,7 @@ public class TicTacToe {
                     if (player2 == ' ') {
                         throw new Exception("Invalid input");
                     } else {
+                        secondPlayer.setIdentifier(player2);
                         break;
                     }
                 } catch (Exception e) {
@@ -134,6 +153,7 @@ public class TicTacToe {
                     if (computerPlayer == ' ') {
                         throw new Exception("Invalid input");
                     } else {
+                        computer.setIdentifier(computerPlayer);
                         break;
                     }
                 } catch (Exception e) {
@@ -143,6 +163,9 @@ public class TicTacToe {
             }
         }
 
+        players.add(firstPlayer);
+        players.add(secondPlayer);
+        players.add(computer);
         /**
          *
          * Checking if the size of the board properties is invalid in the input

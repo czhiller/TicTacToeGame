@@ -22,7 +22,7 @@ public class Player {
     /**
      *
      * The player constructor.
-     * 
+     *
      * @param name
      * @param identifier
      * @param order
@@ -35,8 +35,19 @@ public class Player {
 
     /**
      * 
-     * The name getter.
+     * Default constructor.
      * 
+     */
+    public Player(int order) {
+        this.name = "DefaultName";
+        this.identifier = ' ';
+        this.order = order;
+    }
+
+    /**
+     *
+     * The name getter.
+     *
      * @return
      */
     public String getName() {
@@ -46,7 +57,7 @@ public class Player {
     /**
      *
      * The name setter.
-     * 
+     *
      * @param name
      */
     public void setName(String name) {
@@ -56,7 +67,7 @@ public class Player {
     /**
      *
      * The identifier getter.
-     * 
+     *
      * @return
      */
     public char getIdentifier() {
@@ -66,7 +77,7 @@ public class Player {
     /**
      *
      * The identifier setter.
-     * 
+     *
      * @param identifier
      */
     public void setIdentifier(char identifier) {
@@ -75,8 +86,8 @@ public class Player {
 
     /**
      *
-     * The order getter. 
-     * 
+     * The order getter.
+     *
      * @return
      */
     public int getOrder() {
@@ -86,7 +97,7 @@ public class Player {
     /**
      *
      * The order setter.
-     * 
+     *
      * @param order
      */
     public void setOrder(int order) {
